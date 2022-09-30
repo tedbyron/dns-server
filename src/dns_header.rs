@@ -5,24 +5,24 @@ use crate::result_code::ResultCode;
 
 #[derive(Clone, Debug)]
 pub struct DnsHeader {
-    pub id: u16, // 16 bits
+    pub id: u16, // 16b
 
-    pub recursion_desired: bool,    // 1 bit
-    pub truncated_message: bool,    // 1 bit
-    pub authoritative_answer: bool, // 1 bit
-    pub opcode: u8,                 // 4 bits
-    pub response: bool,             // 1 bit
+    pub recursion_desired: bool,    // 1b
+    pub truncated_message: bool,    // 1b
+    pub authoritative_answer: bool, // 1b
+    pub opcode: u8,                 // 4b
+    pub response: bool,             // 1b
 
-    pub rescode: ResultCode,       // 4 bits
-    pub checking_disabled: bool,   // 1 bit
-    pub authed_data: bool,         // 1 bit
-    pub z: bool,                   // 1 bit
-    pub recursion_available: bool, // 1 bit
+    pub rescode: ResultCode,       // 4b
+    pub checking_disabled: bool,   // 1b
+    pub authed_data: bool,         // 1b
+    pub z: bool,                   // 1b
+    pub recursion_available: bool, // 1b
 
-    pub questions: u16,             // 16 bits
-    pub answers: u16,               // 16 bits
-    pub authoritative_entries: u16, // 16 bits
-    pub resource_entries: u16,      // 16 bits
+    pub questions: u16,             // 16b
+    pub answers: u16,               // 16b
+    pub authoritative_entries: u16, // 16b
+    pub resource_entries: u16,      // 16b
 }
 
 impl DnsHeader {
@@ -61,7 +61,7 @@ impl DnsHeader {
         self.opcode = (a >> 3) & 0x0F;
         self.response = (a & (1 << 7)) > 0;
 
-        self.rescode = ResultCode::from_num(b & 0x0F);
+        self.rescode = ResultCode::from(b & 0x0F);
         self.checking_disabled = (b & (1 << 4)) > 0;
         self.authed_data = (b & (1 << 5)) > 0;
         self.z = (b & (1 << 6)) > 0;

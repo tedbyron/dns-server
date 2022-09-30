@@ -8,15 +8,15 @@ pub enum ResultCode {
     REFUSED = 5,
 }
 
-impl ResultCode {
-    pub fn from_num(num: u8) -> ResultCode {
-        match num {
-            1 => ResultCode::FORMERR,
-            2 => ResultCode::SERVFAIL,
-            3 => ResultCode::NXDOMAIN,
-            4 => ResultCode::NOTIMP,
-            5 => ResultCode::REFUSED,
-            _ => ResultCode::NOERROR,
+impl From<u8> for ResultCode {
+    fn from(n: u8) -> Self {
+        match n {
+            1 => Self::FORMERR,
+            2 => Self::SERVFAIL,
+            3 => Self::NXDOMAIN,
+            4 => Self::NOTIMP,
+            5 => Self::REFUSED,
+            _ => Self::NOERROR,
         }
     }
 }
