@@ -7,7 +7,6 @@ pub struct PacketBuffer {
 
 impl PacketBuffer {
     /// This gives us a fresh buffer for holding the packet contents, and a
-
     /// field for keeping track of where we are.
     pub const fn new() -> Self {
         Self {
@@ -102,9 +101,9 @@ impl PacketBuffer {
         // and set it to "." at the end of the first iteration.
         let mut delim = "";
         loop {
-            // Dns Packets are untrusted data, so we need to be paranoid. Someone
-            // can craft a packet with a cycle in the jump instructions. This guards
-            // against such packets.
+            // Dns Packets are untrusted data, so we need to be paranoid.
+            // Someone can craft a packet with a cycle in the jump instructions.
+            // This guards against such packets.
             if jumps_performed > max_jumps {
                 bail!("Limit of {max_jumps} jumps exceeded");
             }
