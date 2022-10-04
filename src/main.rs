@@ -165,7 +165,7 @@ impl PacketBuffer {
     }
 }
 
-#[derive(Copy, Clone, Debug, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum ResultCode {
     NOERROR = 0,
     FORMERR = 1,
@@ -188,7 +188,7 @@ impl From<u8> for ResultCode {
     }
 }
 
-#[derive(Clone, Debug)]
+#[derive(Debug, Clone, Copy)]
 pub struct DnsHeader {
     pub id: u16, // 16b
 
@@ -262,7 +262,7 @@ impl DnsHeader {
     }
 }
 
-#[derive(PartialEq, Eq, Debug, Clone, Hash, Copy)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum QueryType {
     UNKNOWN(u16),
     A, // 1
@@ -306,8 +306,7 @@ impl DnsQuestion {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord)]
-#[allow(dead_code)]
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord)]
 pub enum DnsRecord {
     UNKNOWN {
         domain: String,
@@ -340,7 +339,7 @@ impl DnsRecord {
                     ((raw_addr >> 24) & 0xFF) as u8,
                     ((raw_addr >> 16) & 0xFF) as u8,
                     ((raw_addr >> 8) & 0xFF) as u8,
-                    ((raw_addr) & 0xFF) as u8,
+                    (raw_addr & 0xFF) as u8,
                 );
 
                 Ok(Self::A { domain, addr, ttl })
@@ -359,7 +358,7 @@ impl DnsRecord {
     }
 }
 
-#[derive(Clone, Debug)]
+#[derive(Debug, Clone)]
 pub struct DnsPacket {
     pub header: DnsHeader,
     pub questions: Vec<DnsQuestion>,
