@@ -5,10 +5,7 @@ use std::io::Read;
 
 use anyhow::Result;
 
-mod packet_parser;
-mod stub_resolver;
-
-use packet_parser::{BytePacketBuffer, DnsPacket};
+use dns_thingy::packet_parser::{BytePacketBuffer, DnsPacket};
 
 fn main() -> Result<()> {
     let mut f = File::open("response_packet")?;
