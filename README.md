@@ -1,4 +1,4 @@
-# dns-thingy
+# dns-server
 
 ```sh
 nc -u -l 1234 > query_packet
